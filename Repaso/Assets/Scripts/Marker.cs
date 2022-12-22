@@ -34,12 +34,20 @@ public class Marker : MonoBehaviour
     public void Player1Goal()
     {
         goalsP1++;
-        scoreP1.text = goalsP1.ToString();
+        MarkerAnimation(scoreP1, goalsP1);
     }
 
     public void Player2Goal()
     {
         goalsP2++;
-        scoreP2.text = goalsP2.ToString();
+        MarkerAnimation(scoreP2, goalsP2);
+    }
+
+    void MarkerAnimation(TextMeshProUGUI score, int goals)
+    {
+        LeanTween.scale(score.gameObject, Vector3.one * 0.75f, 0f).setOnComplete(() => {
+            score.text = goals.ToString();
+            LeanTween.scale(score.gameObject, Vector3.one, 0.35f).setEaseInOutElastic();
+        });
     }
 }
